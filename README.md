@@ -79,12 +79,6 @@
 
 </details>
 
-## PACKAGES
-
-**Source:** [https://github.com/rafaelfgx/DotNetCore](https://github.com/rafaelfgx/DotNetCore)
-
-**Published:** [https://www.nuget.org/profiles/rafaelfgx](https://www.nuget.org/profiles/rafaelfgx)
-
 ## LAYERS
 
 **Web:** Frontend and Backend.
@@ -194,6 +188,10 @@ It has properties to transport and return data.
 ## DATABASE
 
 It encapsulates data persistence.
+
+## Worker
+
+Cron jobs/ BackgroundService logic
 
 ### Context
 
