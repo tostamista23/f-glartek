@@ -14,6 +14,7 @@ namespace API.Application
         Task<Result> DeleteAsync(long id);
         Task<Result> UpdateAsync(CronJobUpdate dto);
         Task<Result<PagedListResult<IEnumerable<CronJobDTO>>>> ListAsync(BasicFilter filtros);
+        Task<List<CronJobDTO>> ListAsync();
         Task<Result<long>> CreateAsync(CronJobAdd cron);
         Task<Result<CronJobDTO>> GetAsync(long id);
 
@@ -150,6 +151,26 @@ namespace API.Application
             }
 
             return new Result(OK);
+        }
+
+        public async Task<List<CronJobDTO>> ListAsync()
+        {
+            List<CronJobDTO> listaDTOs = new();
+
+            foreach (CronJob cron in await CronJobRepository.Queryable.ToListAsync())
+            {
+                listaDTOs.Add(new CronJobDTO()
+                {
+                    Id = cron.Id,
+                    Uri = cron.Uri,
+                    HttpMethod = cron.HttpMethod,
+                    Body = cron.Body,
+                    Schecule = cron.Schecule,
+                    TimeZone = cron.TimeZone
+                });
+            }
+
+            return listaDTOs;
         }
     }
 }

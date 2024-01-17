@@ -4,7 +4,7 @@ import { CronJob } from "../../../models/cronJob.model";
 import { ActivatedRoute } from "@angular/router";
 import { Subscription } from "rxjs";
 import { Location } from '@angular/common';
-import cron from 'cron-validate'
+var cronValidator = require('cron-expression-validator');
 
 @Component({
     selector: "cronjob",
@@ -31,8 +31,10 @@ export class CronJobComponent {
     }
 
     action() {
-        if (!cron(this.elemento.schecule).isValid()) {
-            alert("Schecule invalid.")
+        const cron = cronValidator.isValidCronExpression(this.elemento.schecule, { error: true })
+
+        if (typeof cron != "boolean" && !cron.isValid) {
+            alert("Schecule invalid. " + cron.errorMessage[0])
             return;
         }
 
