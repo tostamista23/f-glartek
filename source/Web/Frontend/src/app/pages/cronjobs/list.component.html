@@ -1,0 +1,87 @@
+<div>
+    <h2>List</h2>
+    <button mat-fab color="primary" aria-label="add" routerLink="/cronjobs/novo">
+        <mat-icon>add</mat-icon>
+    </button>
+</div>
+
+<mat-table #table [dataSource]="dataSource" matSort>
+
+    <!-- Image Column -->
+
+    <ng-container matColumnDef="id">
+        <mat-header-cell *matHeaderCellDef mat-sort-header fxHide fxShow.gt-xs>ID</mat-header-cell>
+        <mat-cell *matCellDef="let elemento" fxHide fxShow.gt-xs>
+            <p class="truncate">{{elemento.id}}</p>
+        </mat-cell>
+    </ng-container>
+
+    <!-- Image Column -->
+    <ng-container matColumnDef="uri">
+        <mat-header-cell *matHeaderCellDef fxHide fxShow.gt-md>Uri</mat-header-cell>
+        <mat-cell *matCellDef="let elemento" fxHide fxShow.gt-md>
+            <p class="truncate">{{elemento.uri}}</p>
+        </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="httpMethod">
+        <mat-header-cell *matHeaderCellDef mat-sort-header>Http Method</mat-header-cell>
+        <mat-cell *matCellDef="let elemento">
+            <p class="truncate">{{elemento.httpMethod}}</p>
+        </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="body">
+        <mat-header-cell *matHeaderCellDef mat-sort-header>Body</mat-header-cell>
+        <mat-cell *matCellDef="let elemento">
+            <p class="truncate">{{elemento.body}}</p>
+        </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="schecule">
+        <mat-header-cell *matHeaderCellDef mat-sort-header>Schecule</mat-header-cell>
+        <mat-cell *matCellDef="let elemento">
+            <p class="truncate">{{elemento.schecule}}</p>
+        </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="timeZone">
+        <mat-header-cell *matHeaderCellDef mat-sort-header>Time Zone</mat-header-cell>
+        <mat-cell *matCellDef="let elemento">
+            <p class="truncate">{{elemento.timeZone}}</p>
+        </mat-cell>
+    </ng-container>
+
+    <!-- Menu Column -->
+    <ng-container matColumnDef="menu">
+        <mat-header-cell *matHeaderCellDef></mat-header-cell>
+        <mat-cell *matCellDef="let elemento" fxHide fxShow.gt-xs (click)="$event.stopPropagation()" class="p-0">
+            <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Menu ">
+                <mat-icon>more_vert</mat-icon>
+            </button>
+            <mat-menu #menu="matMenu">
+                <button mat-menu-item (click)="edit(elemento.id)">
+                    <mat-icon class="active-icon">edit</mat-icon>
+                    <span>Editar</span>
+                </button>
+                <button mat-menu-item (click)="delete(elemento.id)">
+                    <mat-icon class="active-icon">delete_forever</mat-icon>
+                    <span>Remover</span>
+                </button>
+            </mat-menu>
+        </mat-cell>
+    </ng-container>
+
+    <mat-header-row *matHeaderRowDef="displayedColumns; sticky:true"></mat-header-row>
+
+    <mat-row *matRowDef="let elemento; columns: displayedColumns;let rIndex = index;let odd = odd" (click)="edit(elemento.id)" [ngClass]="{'odd-row-color': odd}" matRipple></mat-row>
+    <div *matNoDataRow class="text-2xl font-semibold text-center align-middle py-8 h-10" [hidden]="service.isLoading">Nenhum registo foi encontrado.</div>
+</mat-table>
+<div *ngIf="service.isLoading" class="h-full" fxLayoutAlign="center center" fxLayout="column">
+    <mat-spinner></mat-spinner>
+    <div>A carregar...</div>
+</div>
+<mat-divider></mat-divider>
+<mat-paginator #paginator [length]="service.filters.totalRecords || 0" [pageIndex]="service.filters.pageIndex" [pageSize]="service.filters.pageSize || 20" [pageSizeOptions]="[20, 50, 100]" (page)="pageUpdated($event)"
+               [showFirstLastButtons]="true" id="paginator">
+</mat-paginator>

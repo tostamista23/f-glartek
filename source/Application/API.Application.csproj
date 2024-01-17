@@ -1,0 +1,29 @@
+<Project Sdk="Microsoft.NET.Sdk">
+    <ItemGroup>
+        <PackageReference Include="DotNetCore.Mediator" />
+        <PackageReference Include="DotNetCore.Security" />
+        <PackageReference Include="Microsoft.Extensions.Localization" />
+    </ItemGroup>
+    <ItemGroup>
+        <ProjectReference Include="..\Database\API.Database.csproj" />
+        <ProjectReference Include="..\Database\API.Database.csproj" />
+        <ProjectReference Include="..\Model\API.Model.csproj" />
+    </ItemGroup>
+    <ItemGroup>
+        <Using Include="API.Database" />
+        <Using Include="API.Domain" />
+        <Using Include="API.Model" />
+        <Using Include="DotNetCore.EntityFrameworkCore" />
+        <Using Include="DotNetCore.Extensions" />
+        <Using Include="DotNetCore.Mediator" />
+        <Using Include="DotNetCore.Objects" />
+        <Using Include="DotNetCore.Results" />
+        <Using Include="DotNetCore.Security" />
+        <Using Include="FluentValidation" />
+        <Using Include="Microsoft.Extensions.Localization" />
+        <Using Include="System.Security.Claims" />
+    </ItemGroup>
+	<ItemGroup>
+		<FrameworkReference Include="Microsoft.AspNetCore.App" />
+	</ItemGroup>
+</Project>

@@ -1,0 +1,52 @@
+<form #elementoForm="ngForm" name="elementoForm">
+
+    <mat-form-field appearance="outline" floatLabel="always" class="uk-width-1-1">
+        <mat-label>Uri</mat-label>
+        <input matInput #uri="ngModel" name="uri" [(ngModel)]="elemento.uri" required>
+        <mat-error *ngIf="!uri.invalid || !uri.pristine" class="alert alert-danger">
+            Uri invalid
+        </mat-error>
+    </mat-form-field>
+
+    <div uk-grid>
+        <mat-form-field appearance="outline" floatLabel="always" class="uk-width-1-3">
+            <mat-label>HTTP Method</mat-label>
+            <mat-select [(ngModel)]="elemento.httpMethod" name="httpMethod" #httpMethod="ngModel" required>
+                <mat-option value="GET">GET</mat-option>
+                <mat-option value="POST">POST</mat-option>
+                <mat-option value="PUT">PUT</mat-option>
+                <mat-option value="DELETE">DELETE</mat-option>
+            </mat-select>
+            <mat-error *ngIf="!httpMethod.invalid || !httpMethod.pristine" class="alert alert-danger">
+                HTTP Method invalid.
+            </mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" floatLabel="always" class="uk-width-1-3">
+            <mat-label>Schecule</mat-label>
+            <input matInput #schecule="ngModel" name="schecule" [(ngModel)]="elemento.schecule" required>
+            <mat-error *ngIf="!schecule.invalid || !schecule.pristine" class="alert alert-danger">
+                Schecule invalid
+            </mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" floatLabel="always" class="uk-width-1-3">
+            <mat-label>Time Zone</mat-label>
+            <input matInput type="time" #timeZone="ngModel" name="timeZone" [(ngModel)]="elemento.timeZone" required>
+            <mat-error *ngIf="!timeZone.invalid || !timeZone.pristine" class="alert alert-danger">
+                Time Zone invalid
+            </mat-error>
+        </mat-form-field>
+    </div>
+
+    <mat-form-field appearance="outline" floatLabel="always" class="uk-width-1-1">
+        <mat-label>Body</mat-label>
+        <textarea matInput #body="ngModel" placeholder="Body" aria-label="Textarea" name="body" [(ngModel)]="elemento.body" required></textarea>
+        <mat-error *ngIf="!body.invalid || !body.pristine" class="alert alert-danger">
+            Body invalid
+        </mat-error>
+    </mat-form-field>
+
+    <button mat-raised-button color="primary" [disabled]="!elementoForm.valid" (click)="action()">{{elemento.id > 0 ? "Update" : "Create"}}</button>
+
+</form>

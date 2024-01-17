@@ -1,0 +1,31 @@
+<Project Sdk="Microsoft.NET.Sdk">
+    <ItemGroup>
+        <PackageReference Include="DotNetCore.EntityFrameworkCore" />
+        <PackageReference Include="DotNetCore.Objects" />
+        <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" />
+        <PackageReference Include="Microsoft.EntityFrameworkCore.Tools">
+            <PrivateAssets>all</PrivateAssets>
+            <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+            <TreatAsUsed>true</TreatAsUsed>
+        </PackageReference>
+    </ItemGroup>
+    <ItemGroup>
+        <ProjectReference Include="..\Domain\API.Domain.csproj" />
+        <ProjectReference Include="..\Model\API.Model.csproj" />
+    </ItemGroup>
+    <ItemGroup>
+        <Using Include="API.Domain" />
+        <Using Include="API.Model" />
+        <Using Include="DotNetCore.EntityFrameworkCore" />
+        <Using Include="DotNetCore.Objects" />
+        <Using Include="DotNetCore.Repositories" />
+        <Using Include="Microsoft.EntityFrameworkCore" />
+        <Using Include="Microsoft.EntityFrameworkCore.Design" />
+        <Using Include="Microsoft.EntityFrameworkCore.Metadata.Builders" />
+        <Using Include="Microsoft.EntityFrameworkCore.SqlServer" />
+        <Using Include="System.Linq.Expressions" />
+    </ItemGroup>
+    <ItemGroup>
+      <Folder Include="Migrations\" />
+    </ItemGroup>
+</Project>
