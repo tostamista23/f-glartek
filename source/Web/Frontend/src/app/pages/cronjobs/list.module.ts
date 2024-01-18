@@ -17,9 +17,12 @@ import { MatDividerModule } from '@angular/material/divider';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatTableModule } from '@angular/material/table';
 import { MatMenuModule } from '@angular/material/menu';
+import { MatAutocompleteModule } from '@angular/material/autocomplete';
 
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { CronJobService } from "../../services/cronJob.service";
+import { TimeZoneService } from "../../services/timeZone.service";
+
 import { MatSelectModule } from "@angular/material/select";
 
 const routes: Route[] = [{
@@ -53,10 +56,12 @@ const routes: Route[] = [{
         MatTableModule,
         MatMenuModule,
         MatSelectModule,
+        MatAutocompleteModule,
         MatProgressSpinnerModule,
     ],
     providers: [
-        CronJobService
+        CronJobService,
+        TimeZoneService
     ]
 })
 export class CronJobsModule { }

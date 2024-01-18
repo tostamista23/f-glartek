@@ -4,7 +4,7 @@ export class CronJob {
     httpMethod: number;
     body: number;
     schecule: string;
-    timeZone: number;
+    timeZone: string;
 
     constructor(x?: any) {
         x = x || {};

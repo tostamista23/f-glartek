@@ -5,6 +5,8 @@
         <PackageReference Include="Microsoft.Extensions.Localization" />
     </ItemGroup>
     <ItemGroup>
+        <ProjectReference Include="..\API.Scheduler\API.Scheduler.csproj" />
+        <ProjectReference Include="..\CrossCutting\API.CrossCutting.csproj" />
         <ProjectReference Include="..\Database\API.Database.csproj" />
         <ProjectReference Include="..\Database\API.Database.csproj" />
         <ProjectReference Include="..\Model\API.Model.csproj" />

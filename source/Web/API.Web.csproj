@@ -6,6 +6,9 @@
         <TypeScriptCompileBlocked>true</TypeScriptCompileBlocked>
     </PropertyGroup>
     <ItemGroup>
+      <Content Remove="TimeZone.file.json" />
+    </ItemGroup>
+    <ItemGroup>
         <PackageReference Include="DotNetCore.AspNetCore" />
         <PackageReference Include="DotNetCore.Logging" />
         <PackageReference Include="DotNetCore.Services" />
@@ -40,5 +43,10 @@
     </ItemGroup>
     <ItemGroup>
       <Folder Include="Frontend\src\settings\" />
+    </ItemGroup>
+    <ItemGroup>
+      <None Include="TimeZone.file.json">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </None>
     </ItemGroup>
 </Project>

@@ -2,8 +2,10 @@ import { Component } from "@angular/core";
 import { CronJobService } from "../../../services/cronJob.service";
 import { CronJob } from "../../../models/cronJob.model";
 import { ActivatedRoute } from "@angular/router";
-import { Subscription } from "rxjs";
+import { Observable, Subscription, map, startWith } from "rxjs";
 import { Location } from '@angular/common';
+import { TimeZoneService } from "../../../services/timeZone.service";
+import { FormControl } from "@angular/forms";
 var cronValidator = require('cron-expression-validator');
 
 @Component({
@@ -12,10 +14,15 @@ var cronValidator = require('cron-expression-validator');
 })
 export class CronJobComponent {
     elemento: CronJob = new CronJob();
+    timezones: any[] = [];
     private routeSub!: Subscription;
+
+    filteredOptions!: Observable<any[]>;
+    timezoneCtrl = new FormControl('');
 
     constructor(
         public service: CronJobService,
+        private _serviceTS: TimeZoneService,
         private route: ActivatedRoute,
         public location: Location,
     ) { }
@@ -25,9 +32,19 @@ export class CronJobComponent {
             const num = Number(params['id'])
 
             if (!isNaN(num)) {
-                this.service.get(num).subscribe(x => this.elemento = x)
+                this.service.get(num).subscribe(x => {
+                    this.elemento = x;
+                    this.timezoneCtrl = new FormControl(x.timeZone)
+                })
             }
         });
+
+        this._serviceTS.list().subscribe((x: any[]) => this.timezones = x)
+
+        this.filteredOptions = this.timezoneCtrl.valueChanges.pipe(
+            startWith(''),
+            map(t => (t ? this._filterStates(t) : this.timezones.slice())),
+        );
     }
 
     action() {
@@ -37,7 +54,7 @@ export class CronJobComponent {
             alert("Schecule invalid. " + cron.errorMessage[0])
             return;
         }
-
+        this.elemento.timeZone = this.timezoneCtrl.value ?? "";
         this.elemento.id ? this.update() : this.create();
     }
 
@@ -61,6 +78,12 @@ export class CronJobComponent {
 
     back() {
         this.location.back();
+    }
+
+    _filterStates(value: string): any[] {
+        const filterValue = value.toLowerCase();
+
+        return this.timezones.filter(t => t.name.toLowerCase().includes(filterValue));
     }
 
     ngOnDestroy() {
