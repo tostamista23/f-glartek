@@ -1,0 +1,23 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+    <UserSecretsId>75018754-348f-457f-8b8b-17e89c181030</UserSecretsId>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="DotNetCore.Results" />
+    <PackageReference Include="Microsoft.Extensions.Configuration.UserSecrets" />
+    <PackageReference Include="Quartz" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\CrossCutting\API.CrossCutting.csproj" />
+    <ProjectReference Include="..\Database\API.Database.csproj" />
+    <ProjectReference Include="..\Domain\API.Domain.csproj" />
+    <ProjectReference Include="..\Model\API.Model.csproj" />
+  </ItemGroup>
+
+</Project>
